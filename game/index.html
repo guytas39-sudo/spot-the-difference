@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harbour at Dusk — Spot the Difference</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: #141824; color: #f3ead8;
+    font-family: Georgia, 'Times New Roman', serif;
+    display: flex; flex-direction: column; align-items: center;
+    min-height: 100vh; padding: 14px 10px 20px;
+  }
+  header { text-align: center; margin-bottom: 8px; }
+  h1 { margin: 0; font-size: 30px; letter-spacing: 1px; color: #ffd9a0; }
+  .sub { margin: 2px 0 0; font-size: 15px; color: #b9c4d6; font-style: italic; }
+  #bar {
+    display: flex; gap: 18px; align-items: center; justify-content: center;
+    margin: 10px 0 12px; font-size: 17px; flex-wrap: wrap;
+  }
+  #bar .pill {
+    background: #232a3d; border: 1px solid #3d4a68; border-radius: 20px;
+    padding: 5px 14px; white-space: nowrap;
+  }
+  #bar .pill b { color: #ffd23f; }
+  button {
+    font-family: inherit; font-size: 15px; cursor: pointer;
+    background: #e8a33d; color: #241a05; border: none; border-radius: 20px;
+    padding: 7px 16px; font-weight: bold;
+  }
+  button:hover { background: #f5b95c; }
+  button:disabled { background: #5a6478; color: #c8ccd6; cursor: default; }
+  #boards { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  figure { margin: 0; text-align: center; }
+  figcaption { margin-top: 6px; font-size: 14px; color: #b9c4d6; letter-spacing: 2px; }
+  canvas {
+    display: block; border: 4px solid #3d4a68; border-radius: 6px;
+    background: #22304a; width: 600px; height: 450px;
+  }
+  canvas.active { border-color: #ffd23f; }
+  #win {
+    display: none; margin-top: 14px; text-align: center;
+    background: #1e3a2a; border: 2px solid #7fc98f; border-radius: 10px;
+    padding: 12px 26px;
+  }
+  #win h2 { margin: 0 0 4px; color: #a9e8b6; font-size: 24px; }
+  #win p { margin: 4px 0 10px; font-size: 16px; }
+  #help { margin-top: 12px; font-size: 13px; color: #8b96ac; text-align: center; max-width: 760px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Harbour at Dusk</h1>
+  <p class="sub">Spot the difference — two pictures, seven changes. Click a change on either side.</p>
+</header>
+<div id="bar">
+  <span class="pill">Found <b id="found">0 / 7</b></span>
+  <span class="pill">Time <b id="time">0:00</b></span>
+  <span class="pill">Hints <b id="hints">3</b></span>
+  <button id="hintBtn" type="button">Hint</button>
+  <button id="roundBtn" type="button">New round</button>
+</div>
+<div id="boards">
+  <figure>
+    <canvas id="left" width="560" height="420" tabindex="0" aria-label="Picture one"></canvas>
+    <figcaption>PICTURE ONE</figcaption>
+  </figure>
+  <figure>
+    <canvas id="right" width="560" height="420" tabindex="0" aria-label="Picture two"></canvas>
+    <figcaption>PICTURE TWO</figcaption>
+  </figure>
+</div>
+<div id="win">
+  <h2>You found them all!</h2>
+  <p id="winText"></p>
+  <button id="againBtn" type="button">Play again</button>
+</div>
+<p id="help">Click a difference on either picture to ring it on both. Wrong clicks cost nothing.
+Arrow keys move the crosshair, Tab switches pictures, Space marks the spot. Hints are limited to three per round.</p>
+<script src="game.js"></script>
+</body>
+</html>
